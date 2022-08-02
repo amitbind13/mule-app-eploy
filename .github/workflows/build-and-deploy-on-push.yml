@@ -91,7 +91,7 @@ jobs:
       env:
         USERNAME: ${{ secrets.anypoint_cicd_username }}
         PASSWORD: ${{ secrets.anypoint_cicd_password }}
-        DECRYPTION_KEY: ${{ secrets.decryption_key }}
+        #DECRYPTION_KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn deploy -DmuleDeploy \
@@ -99,7 +99,7 @@ jobs:
          -Danypoint.username="$USERNAME" \
          -Danypoint.password="$PASSWORD" \
          -Denv=Sandbox \
-         -Ddecryption.key="$DECRYPTION_KEY" \
+        #-Ddecryption.key="$DECRYPTION_KEY" \
          -DskipTests
          
     - name: Notify Slack
