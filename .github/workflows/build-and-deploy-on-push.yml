@@ -92,20 +92,6 @@ jobs:
         USERNAME: ${{ secrets.anypoint_cicd_username }}
         PASSWORD: ${{ secrets.anypoint_cicd_password }}
         #DECRYPTION_KEY: ${{ secrets.decryption_key }}
-      run: |
-        artifactName=$(ls *.jar | head -1)
-        mvn deploy -DmuleDeploy \
-         -Dmule.artifact=$artifactName \
-         -Danypoint.username="$USERNAME" \
-         -Danypoint.password="$PASSWORD" \
-         -Denv=Sandbox \
-        #-Ddecryption.key="$DECRYPTION_KEY" \
-         -DskipTests
+      run: mvn deploy -DmuleDeploy 
          
-    - name: Notify Slack
-      uses: act10ns/slack@v1.2.2
-      with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-          channel: '#github-actions-notifications'
-      if: always()
+
